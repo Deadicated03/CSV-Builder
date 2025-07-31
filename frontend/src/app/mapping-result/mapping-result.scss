@@ -1,0 +1,182 @@
+/* --- Βασική ρύθμιση --- */
+html, body {
+  height: 100%; margin: 0; padding: 0; background-color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- Κύριος Container --- */
+.mapping-container {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+  padding: 3rem 2rem; box-sizing: border-box; color: white;
+  background: radial-gradient(at 90% 10%, #B59A75 0px, transparent 40%),
+              radial-gradient(at 20% 90%, #1A4E8B 0px, transparent 50%),
+              radial-gradient(at 50% 50%, #101010 0px, #000000 70%);
+}
+
+.mapping-container h2 {
+  font-size: 2.2rem; margin-bottom: 2rem; opacity: 0;
+  text-align: center;
+  animation: slideDown 0.8s ease-out forwards;
+  margin-right: 200px;
+}
+
+/* --- Wrapper & Styling Πίνακα --- */
+.table-wrapper {
+  width: 100%; max-width: 1000px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  margin-right: 200px;
+
+  /* ★★★ Η ΛΥΣΗ ΓΙΑ ΤΟ SCROLL ΕΙΝΑΙ ΕΔΩ ★★★ */
+  max-height: 60vh; /* 1. Ορίζουμε μέγιστο ύψος για το πλαίσιο */
+  overflow-y: auto; /* 2. Προσθέτουμε scrollbar αν το περιεχόμενο δεν χωράει */
+}
+
+.table-wrapper table {
+  width: 100%; border-collapse: collapse; table-layout: fixed;
+}
+.table-wrapper th, .table-wrapper td {
+  padding: 12px 15px; text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.table-wrapper th {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem; text-transform: uppercase;
+}
+.table-wrapper tr:last-child td { border-bottom: none; }
+
+
+/* ★★★ Custom Styling για τα Checkboxes ★★★ */
+.custom-checkbox {
+  display: inline-flex; position: relative;
+  cursor: pointer;
+}
+.custom-checkbox input { display: none; } /* Κρύβουμε το default checkbox */
+.custom-checkbox span {
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+.custom-checkbox input:checked + span {
+  background-color: #3498db;
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+}
+/* Δημιουργούμε το "tick" mark */
+.custom-checkbox input:checked + span::after {
+  content: '';
+  position: absolute;
+  left: 7px; top: 3px;
+  width: 5px; height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 10px 30px 10px 15px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.2s ease;
+}
+
+.select-wrapper select option {
+  background: #222;
+  color: #eee;
+}
+
+.select-wrapper:hover select {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.select-wrapper:hover::after {
+  color: white;
+}
+.select-wrapper select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+.select-wrapper select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.select-wrapper select[style*="red"] {
+  background: transparent !important;
+  border-color: #c0392b !important;
+  box-shadow: inset 0 0 10px 2px rgba(192, 57, 43, 0.6);
+}
+
+/* ★★★ Styling για Μήνυμα Σφάλματος & Κουμπιά ★★★ */
+.error-message {
+  margin-right: 200px;
+  width: 100%; max-width: 800px;
+  margin-top: 1.5rem; padding: 15px;
+  color: #f8d7da; background-color: rgba(248, 215, 218, 0.1);
+  border: 1px solid rgba(245, 198, 203, 0.3);
+  border-radius: 6px; font-weight: 500;
+  opacity: 0; animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+.button-group {
+  margin-right: 200px;
+  margin-top: 1.5rem; display: flex; gap: 1rem;
+  opacity: 0; animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+.button-group button {
+  padding: 12px 25px; background-color: rgba(30, 32, 45, 0.8);
+  color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px; font-size: 0.9rem; text-transform: uppercase;
+  font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.button-group button:hover, .button-group button:focus {
+  outline: none; background-color: rgba(45, 48, 68, 0.8); border-color: white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  text-shadow: -1px 0 rgba(255, 0, 255, 0.7), 1px 0 rgba(255, 255, 255, 0.7);
+}
+.button-group button::after {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s;
+}
+.button-group button:hover::after { left: 100%; }
+.button-group button:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.table-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Για Firefox */
+.table-wrapper {
+  scrollbar-width: none;
+}
+
+/* Για Internet Explorer και παλιότερες εκδόσεις Edge (λιγότερο συχνό) */
+.table-wrapper {
+  -ms-overflow-style: none;
+}
+
+/* --- Keyframes --- */
+@keyframes slideDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }

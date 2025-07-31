@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "Index": {
+      "type": "number"
+    },
+    "User Id": {
+      "type": "string"
+    },
+    "First Name": {
+      "type": "string"
+    },
+    "Last Name": {
+      "type": "string"
+    },
+    "Sex": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "Phone": {
+      "type": "string"
+    },
+    "Date of birth": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "Job Title": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Index",
+    "User Id",
+    "First Name",
+    "Last Name",
+    "Sex",
+    "Email",
+    "Phone",
+    "Date of birth",
+    "Job Title"
+  ],
+  "errorMessages": {
+    "Index": "The field Index must be a NUMBER",
+    "User Id": "The field User Id must be a STRING",
+    "First Name": "The field First Name must be a STRING",
+    "Last Name": "The field Last Name must be a STRING",
+    "Sex": "The field Sex must be a STRING",
+    "Email": "The field Email must be a STRING",
+    "Phone": "The field Phone must be a STRING",
+    "Date of birth": "The field Date of birth must be a STRING",
+    "Job Title": "The field Job Title must be a STRING"
+  }
+}

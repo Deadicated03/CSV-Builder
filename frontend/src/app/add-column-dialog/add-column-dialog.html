@@ -1,0 +1,79 @@
+<form #addColumnForm="ngForm" (ngSubmit)="onSave()" class="custom-dialog">
+  <h2 class="dialog-title">Add New Column</h2>
+
+  <div class="dialog-form-container">
+    <div class="form-group">
+      <label for="columnName">Name *</label>
+      <input
+        type="text"
+        id="columnName"
+        name="columnName"
+        [(ngModel)]="column.name"
+        required
+      />
+      <small class="hint">e.g., Input the column name exactly as in your CSV or Excel file.</small>
+      <div class="error" *ngIf="addColumnForm.controls['columnName']?.hasError('required')">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="columnExample">Example</label>
+      <input
+        type="text"
+        id="columnExample"
+        name="columnExample"
+        [(ngModel)]="column.example"
+        placeholder="Optional Field"
+      />
+      <small class="hint">e.g., 'John Doe' or 123456.</small>
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="column.isRequired" name="columnIsRequired" />
+        Is Required
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="columnFormat">Column Format</label>
+      <select id="columnFormat" name="columnFormat" [(ngModel)]="column.format">
+        <option value="text">Text</option>
+        <option value="number">Number</option>
+        <option value="date">Date</option>
+        <option value="boolean">Boolean</option>
+        <option value="email">Email</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="columnErrorMessage">Custom Validation Error Message</label>
+      <input
+        type="text"
+        id="columnErrorMessage"
+        name="columnErrorMessage"
+        [(ngModel)]="column.errorMessage"
+        placeholder="Optional Field"
+      />
+      <small class="hint">e.g., Please enter a valid email address.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="regex">Custom Regex</label>
+      <input
+        type="text"
+        id="regex"
+        name="regex"
+        [(ngModel)]="column.regex"
+        placeholder="Optional Field"
+      />
+      <small class="hint">e.g., ^\d+(\.\d&#123;1,2&#125;)?$</small>
+    </div>
+  </div>
+
+  <div class="dialog-actions">
+    <button type="button" (click)="dialogRef.close()">Cancel</button>
+    <button type="submit" [disabled]="!addColumnForm.valid">Add</button>
+  </div>
+</form>

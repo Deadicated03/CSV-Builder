@@ -1,0 +1,156 @@
+/* =================================================================== */
+/*        DATA PREVIEW PAGE - CORRECTED ALIGNMENT & SCROLL           */
+/* =================================================================== */
+
+// --- Μεταβλητές για ομοιομορφία ---
+:host {
+  --text-dark: #2c3e50;
+  --text-light: #eceff1;
+  --text-light-strong: #ffffff;
+  --glass-bg: rgba(30, 30, 40, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --animation-curve: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --button-primary-bg: linear-gradient(135deg, #2948ff, #6234e7);
+  --button-primary-hover-bg: linear-gradient(135deg, #3a5aff, #7b4dff);
+  --button-glow-color: rgba(98, 52, 231, 0.4);
+}
+
+// --- ΒΑΣΙΚΗ ΔΙΟΡΘΩΣΗ LAYOUT: Μεταφορά αριστερά ---
+.data-view-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 2rem;
+  padding-right: 280px; // Αφήνει χώρο για το sidebar
+  align-items: flex-start; // Στοίχιση αριστερά
+
+  background: radial-gradient(at 90% 10%, #B59A75 0px, transparent 40%),
+              radial-gradient(at 20% 90%, #1A4E8B 0px, transparent 50%),
+              radial-gradient(at 50% 50%, #101010 0px, #000000 70%);
+}
+
+// --- Τίτλος & Στοιχεία ---
+.data-view-container h2, 
+.virtual-scroll-container, 
+.action-button-container {
+  width: 100%; // Πιάνουν όλο το πλάτος του νέου container
+  opacity: 0; // Αόρατα για το αρχικό animation
+}
+
+.data-view-container h2 {
+  font-size: 2.5rem;
+  text-align: left; // Στοίχιση αριστερά
+  margin-bottom: 1.5rem;
+  color: var(--text-light-strong);
+  animation: slideDown 0.8s var(--animation-curve) 0.2s forwards;
+}
+
+// --- CONTAINER ΠΙΝΑΚΑ: ΕΔΩ ΜΠΑΙΝΕΙ ΤΟ ΟΡΙΖΟΝΤΙΟ SCROLL ---
+.virtual-scroll-container {
+  flex: 1; // Παίρνει όλο τον υπόλοιπο κάθετο χώρο
+  min-height: 0; // Απαραίτητο για το flex: 1
+  border-radius: 15px;
+  
+  // Glassmorphism
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  // Animation
+  animation: fadeInUp 0.8s var(--animation-curve) 0.4s forwards;
+  
+  // Οριζόντιο scroll για ολόκληρο το πλαίσιο
+  overflow-x: auto;
+}
+
+.action-button-container {
+  text-align: right; // Το κουμπί πάει δεξιά
+  margin-top: 1.5rem;
+  animation: fadeInUp 0.8s var(--animation-curve) 0.6s forwards;
+}
+
+// --- Styling για τον Virtual Scroller ---
+.data-rows-viewport { // Στοχεύουμε το CDK viewport με την class
+  height: 100%; // Γεμίζει τον χώρο που αφήνει το header
+}
+
+.virtual-scroll-header, .virtual-scroll-row {
+  display: flex;
+  box-sizing: border-box;
+  // ΚΡΙΣΙΜΟ: Δίνουμε ένα min-width για να επιτρέψουμε το scroll
+  min-width: fit-content;
+}
+
+.virtual-scroll-header {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-light-strong);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky; // Κάνει το header να μένει κολλημένο πάνω
+  top: 0;
+  background: var(--glass-bg); // Απαραίτητο για το sticky header
+  z-index: 10;
+}
+
+.virtual-scroll-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// --- Η ΛΥΣΗ ΓΙΑ ΤΗ ΣΤΟΙΧΙΣΗ: Σταθερό πλάτος στα κελιά ---
+.virtual-scroll-cell {
+  // Αντί για flex: 1, χρησιμοποιούμε ένα συνδυασμό που εγγυάται στοίχιση
+  flex-grow: 1;
+  flex-shrink: 0; // Δεν αφήνουμε τα κελιά να "στριμωχτούν"
+  flex-basis: 180px; // Ορίζουμε ένα βασικό πλάτος (παίξε με αυτή την τιμή)
+
+  padding: 14px 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-light);
+}
+
+// --- ΑΝΑΒΑΘΜΙΣΗ ΚΟΥΜΠΙΟΥ ---
+.primary-action-btn {
+  background: var(--button-primary-bg) !important;
+  color: var(--text-light-strong) !important;
+  border-radius: 10px !important;
+  transition: all 0.2s var(--animation-curve) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  
+  &:hover {
+    background: var(--button-primary-hover-bg) !important;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 20px 0 var(--button-glow-color) !important;
+  }
+}
+
+
+// --- ⭐ ΔΙΟΡΘΩΣΗ: ΕΜΦΑΝΙΣΗ SCROLLBAR ---
+// Αφαιρέθηκε το τμήμα που έκρυβε τις μπάρες κύλισης.
+// Πλέον, το overflow-x: auto θα εμφανίσει οριζόντια μπάρα όταν χρειάζεται.
+
+
+// --- KEYFRAMES ---
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

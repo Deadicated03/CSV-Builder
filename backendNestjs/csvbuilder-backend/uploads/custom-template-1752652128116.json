@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "id": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "pattern": "custom-boolean"
+    }
+  },
+  "required": [
+    "first_name",
+    "email",
+    "date",
+    "id",
+    "status"
+  ],
+  "errorMessages": {
+    "first_name": "The field first_name must be a STRING",
+    "email": "The field email must be a STRING",
+    "date": "The field date must be a STRING",
+    "id": "The field id must be a NUMBER",
+    "status": "The field status must be a BOOLEAN"
+  }
+}

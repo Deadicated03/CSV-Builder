@@ -1,0 +1,19 @@
+/* src/styles.scss */
+
+/*
+ * Δημιουργεί τη βάση για ένα full-page layout.
+ * Λέμε στον browser ότι το html και το body πρέπει να πιάνουν όλο το ύψος
+ * και να μην έχουν τα default margins.
+*/
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Πολύ σημαντικό: Αποτρέπει τις διπλές μπάρες κύλισης */
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

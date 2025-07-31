@@ -1,0 +1,46 @@
+<!-- 1. Κύριος container για τη σελίδα -->
+<div class="no-code-container">
+  <h2>No Code Template</h2>
+
+  <!-- 2. Ένας wrapper για τα πάνω controls (κουμπιά & input) -->
+  <div class="top-controls">
+    <div class="button-group">
+      <button mat-raised-button (click)="openAddColumn()" style="color: hsl(0, 0%, 100%) !important;">➕ Add Column</button>
+      <button mat-raised-button (click)="saveTemplate()" style="color: #ffffff !important;">💾 Save template</button>
+    </div>
+    
+    <mat-form-field appearance="outline" class="template-name-field" floatLabel="always" style="color: hsl(0, 0%, 100%) !important;">
+      <mat-label>Template Name</mat-label>
+      <input matInput [(ngModel)]="templateName" placeholder="" />
+    </mat-form-field>
+  </div>
+
+  <!-- 3. Ένας wrapper για τον πίνακα (για το background & border) -->
+  <div class="table-wrapper">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>format</th>
+          <th>example</th>
+          <th style="width: 100px;">required</th>
+          <th>Regex</th>
+          <th style="width: 120px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let col of columns">
+          <td>{{ col.name }}</td>
+          <td>{{ col.format }}</td>
+          <td>{{ col.example }}</td>
+          <td>{{ col.isRequired ? 'Yes' : 'No' }}</td>
+          <td>{{ col.regex }}</td>
+          <td>
+            <!-- Αλλάζουμε το mat-button σε mat-raised-button για ομοιομορφία -->
+            <button mat-raised-button color="warn" (click)="removeColumn(col)" style="color: #c02b2b !important;">🗑 Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

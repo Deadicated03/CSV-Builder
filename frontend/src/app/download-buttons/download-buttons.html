@@ -1,0 +1,18 @@
+<!-- Wrapper για να ομαδοποιήσουμε τις δύο επιλογές λήψης -->
+<div class="download-buttons-wrapper">
+
+  <!-- Κάρτα #1: Λήψη CSV Headers -->
+  <div class="download-container">
+    <label for="headers-filename">Headers file name:</label>
+    <input id="headers-filename" type="text" [(ngModel)]="fileName" placeholder="template_headers" />
+    <button class="download-btn" (click)="downloadCsv()">Download CSV Headers</button>
+  </div>
+
+  <!-- Κάρτα #2: Λήψη JSON Template -->
+  <div class="download-container">
+    <label for="json-filename">JSON Template file name:</label>
+    <input id="json-filename" type="text" [(ngModel)]="fileName" placeholder="template_schema" />
+    <button class="download-btn" (click)="downloadJson()">Download Template</button>
+  </div>
+
+</div>

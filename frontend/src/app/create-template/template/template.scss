@@ -1,0 +1,139 @@
+.template-container {
+  min-height: 100vh;
+  background: radial-gradient(at 90% 10%, #B59A75 0px, transparent 40%),
+              radial-gradient(at 20% 90%, #1A4E8B 0px, transparent 50%),
+              radial-gradient(at 50% 50%, #101010 0px, #000000 70%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+}
+
+/* Τίτλος (πρώτο animation) */
+.template-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  animation: slideDown 0.8s ease-out forwards;
+  margin-right: 15rem;
+}
+
+/* Το πλαίσιο που περιέχει τον πίνακα (δεύτερο animation) */
+.tables-row {
+  width: 100%;
+  max-width: 1000px; /* Μέγιστο πλάτος για να μην απλώνει πολύ */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards; /* Καθυστέρηση 0.2s */
+  margin-right: 15rem;
+
+  /* ⭐⭐⭐ Η ΛΥΣΗ ΓΙΑ ΤΟ SCROLL ΕΙΝΑΙ ΕΔΩ ⭐⭐⭐ */
+  /* 1. Ορίζουμε ένα μέγιστο ύψος για το πλαίσιο του πίνακα */
+  max-height: 45vh; /* (Μπορείς να παίξεις με αυτή την τιμή, π.χ. 50vh, 65vh) */
+
+  /* 2. Λέμε στον browser να προσθέσει scrollbar ΑΝ το περιεχόμενο δεν χωράει */
+  overflow-y: auto;
+  /* ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ */
+}
+
+/* Το component με τα κουμπιά (τρίτο animation) */
+app-download-buttons {
+  display: block; /* Για να λειτουργήσει το margin-top */
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards; /* Καθυστέρηση 0.4s */
+  margin-right: 15rem;
+}
+
+/*
+  ==========================================
+  Styling για τον Πίνακα και τα Form Controls
+  ==========================================
+*/
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Ενώνει τα κελιά */
+}
+
+tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+tr:last-child {
+  border-bottom: none; /* Η τελευταία γραμμή δεν έχει γραμμή από κάτω */
+}
+
+td {
+  padding: 16px 8px;
+  vertical-align: middle; /* Στοιχίζει τα πάντα κάθετα στο κέντρο */
+  text-align: left;
+}
+
+/* Το όνομα της στήλης (π.χ. "Name", "Email") */
+td:first-child {
+  font-weight: 500;
+  color: #ecf0f1;
+}
+
+/* Custom Select Dropdown */
+select {
+  width: 100%;
+  padding: 10px;
+  background-color: #34495e;
+  color: white;
+  border: 1px solid #4a627a;
+  border-radius: 6px;
+  -webkit-appearance: none; /* Αφαιρεί το default στυλ σε Chrome/Safari */
+  -moz-appearance: none;    /* Αφαιρεί το default στυλ σε Firefox */
+  appearance: none;         /* Αφαιρεί το default στυλ */
+  /* Custom βελάκι με SVG */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 10px auto;
+  padding-right: 30px; /* Χώρος για το βελάκι */
+}
+
+/* Custom Checkbox */
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #bdc3c7;
+}
+
+input[type="checkbox"] {
+  width: 1.3em;
+  height: 1.3em;
+  margin-left: 10px;
+  accent-color: #3498db; /* Μοντέρνος τρόπος για να αλλάξεις το χρώμα του checkbox */
+  cursor: pointer;
+}
+
+.tables-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Για Firefox και Internet Explorer */
+.tables-row {
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+/* --- KEYFRAMES --- */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

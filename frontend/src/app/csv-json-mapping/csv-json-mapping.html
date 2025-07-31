@@ -1,0 +1,50 @@
+<div class="data-preview-container">
+  <h2>CSV Preview</h2>
+
+  <!-- ★★★ ΕΝΑ WRAPPER DIV ΓΙΑ ΟΛΟ ΤΟΝ ΠΙΝΑΚΑ ★★★ -->
+  <div class="table-wrapper">
+    <!-- ΠΙΝΑΚΑΣ #1: ΜΟΝΟ Η ΚΕΦΑΛΙΔΑ (ΕΞΩ ΑΠΟ ΤΟ SCROLL) -->
+    <table class="csv-table csv-header-table">
+      <thead>
+        <tr>
+          <th style="width: 70px; text-align: center;">Α/Α</th>
+          <th *ngFor="let key of objectKeys(requiredFields)">
+            {{ requiredFields[key] }}
+          </th>
+        </tr>
+      </thead>
+    </table>
+    
+    <!-- ΤΟ VIEWPORT ΠΟΥ ΠΕΡΙΕΧΕΙ ΤΟΝ ΔΕΥΤΕΡΟ ΠΙΝΑΚΑ (ΣΩΜΑ) -->
+    <cdk-virtual-scroll-viewport
+      itemSize="53"
+      class="scroll-container">
+      
+      <!-- ΠΙΝΑΚΑΣ #2: ΜΟΝΟ ΤΟ ΣΩΜΑ -->
+      <table class="csv-table csv-body-table">
+        <tbody>
+          <tr *cdkVirtualFor="let row of csvData; let rowIndex = index; trackBy: trackByIndex">
+            <td style="width: 70px; text-align: center;">{{ rowIndex + 1 }}</td>
+            <td *ngFor="let key of objectKeys(requiredFields); let colIndex = index"
+                [style.backgroundColor]="hasError(rowIndex, headers.indexOf(key)) ? '#f88' : null"
+                (dblclick)="startEditing(rowIndex, colIndex)">
+              <!-- Το περιεχόμενο του κελιού παραμένει ίδιο -->
+              <ng-container *ngIf="editRowIndex === rowIndex && editColIndex === colIndex; else readMode">
+                <input [value]="editValue" (input)="editValue = $any($event.target).value" (blur)="saveEdit(rowIndex, colIndex)" (keydown.enter)="saveEdit(rowIndex, colIndex)" (keydown.esc)="cancelEdit()" autofocus />
+              </ng-container>
+              <ng-template #readMode>{{ csvData[rowIndex]?.[headers.indexOf(key)] }}</ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </cdk-virtual-scroll-viewport>
+  </div> <!-- ΤΕΛΟΣ ΤΟΥ TABLE-WRAPPER -->
+
+  <div *ngIf="headers.length === 0">
+    <p>No data</p>
+  </div>
+
+  <div class="action-button-container">
+    <button (click)="downloadCSV()" class="primary-action-btn">Download CSV</button>
+  </div>
+</div>

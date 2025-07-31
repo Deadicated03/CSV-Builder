@@ -1,0 +1,120 @@
+/* =================================================================== */
+/*                       GLASSMORPHISM STYLES                          */
+/* =================================================================== */
+
+// 1. Μεταβλητές (Variables)
+$text-dark: #2c3e50;         // Ένα σκούρο, ευανάγνωστο χρώμα για το κείμενο
+$glass-bg: rgba(255, 255, 255, 0.11); // Ημιδιαφανές λευκό για το "γυαλί"
+$glass-border-color: rgba(255, 255, 255, 0.2); // Λίγο πιο έντονο λευκό για το περίγραμμα
+$button-hover-bg: rgba(255, 255, 255, 0.2); // Χρώμα κουμπιού στο hover
+$soft-shadow-color: rgba(0, 0, 0, 0.15); // Μια πιο απαλή, μοντέρνα σκιά
+$transition-speed: 0.3s;
+
+/* ------------------------------------------------------------------- */
+
+// 2. Styling του Host (Sidebar) - Προσαρμοσμένο για "Glassmorphism"
+:host {
+  // --- ΔΕΝ ΑΛΛΑΖΟΥΜΕ ΤΗ ΘΕΣΗ (Όπως ζητήθηκε) ---
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 100vh;
+  z-index: 9999;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; // Μείωσα το κενό για πιο αρμονική εμφάνιση
+  transform:  translateX(10%);
+
+
+  // --- GLASSMORPHISM EFFECT ---
+  // Το ημιδιαφανές φόντο
+  background: $glass-bg;
+  
+  // Το διακριτικό περίγραμμα που δίνει την αίσθηση του γυαλιού
+  border: 1px solid $glass-border-color;
+  
+  // Η απαλή σκιά που κάνει το στοιχείο να "επιπλέει"
+  box-shadow: 0 8px 32px 0 $soft-shadow-color;
+  
+  // Η "μαγεία" του glassmorphism: Θολώνει το περιεχόμενο πίσω από το στοιχείο
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(10px); // Για υποστήριξη σε Safari
+}
+
+/* ------------------------------------------------------------------- */
+
+// 3. Styling των Κουμπιών - Εναρμονισμένο με το Glassmorphism
+$text-bright: rgba(255, 255, 255, 0.95); // Φωτεινό λευκό για το κείμενο
+$shine-color: rgba(255, 255, 255, 0.2);  // Χρώμα για το εφέ λάμψης
+
+nav button {
+  // --- Βασικά Styles ---
+  display: block;
+  width: 100%;
+  padding: 14px 18px; // Λίγο παραπάνω padding
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+  transition: all $transition-speed ease;
+  
+  // ⭐ ΝΕΟ: Για το animation λάμψης
+  position: relative;
+  overflow: hidden;
+
+  // --- ⭐ ΑΝΑΒΑΘΜΙΣΗ: ΜΕΓΑΛΥΤΕΡΑ & ΠΙΟ ΚΑΘΑΡΑ ΓΡΑΜΜΑΤΑ ---
+  font-size: 1rem; // Ελαφρώς μεγαλύτερο μέγεθος
+  font-weight: 600;
+  text-align: left;
+  text-transform: uppercase; // ΚΕΦΑΛΑΙΑ ΓΙΑ ΕΜΦΑΣΗ
+  letter-spacing: 0.8px; // Αυξάνει την απόσταση για καθαρότητα
+
+  // --- ⭐ ΑΝΑΒΑΘΜΙΣΗ: ΝΕΟ ΧΡΩΜΑ & ΚΑΛΥΤΕΡΗ ΑΝΤΙΘΕΣΗ ---
+  color: $text-bright;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); // Σκιά για να ξεχωρίζει το κείμενο
+
+  // --- Εφέ στο Hover/Focus (Βελτιωμένο) ---
+  &:hover,
+  &:focus {
+    outline: none;
+    background: $button-hover-bg;
+    border-color: $glass-border-color;
+    transform: translateY(-3px) scale(1.03); // Λίγο πιο έντονη ανύψωση
+  }
+
+  // --- Εφέ στο κλικ (Active) ---
+  &:active {
+    transform: translateY(0px) scale(0.98);
+    transition-duration: 0.1s;
+  }
+
+  // --- ⭐ ΝΕΟ: ANIMATION "ΛΑΜΨΗΣ" (SHINE EFFECT) ---
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; // Το πλάτος της "λάμψης"
+    height: 100%;
+    
+    // Η λάμψη είναι ένα διαγώνιο gradient
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      $shine-color 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    
+    // Ξεκινάει κρυμμένο πολύ αριστερά
+    transform: translateX(-200%);
+    transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  // Όταν κάνουμε hover, η λάμψη διατρέχει το κουμπί
+  &:hover::after {
+    transform: translateX(250%);
+  }
+}

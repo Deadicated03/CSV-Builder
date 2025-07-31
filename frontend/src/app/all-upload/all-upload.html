@@ -1,0 +1,12 @@
+<div class="upload-form">
+  <h2>Upload CSV and JSON Template</h2>
+  <label for="csv">CSV file:</label>
+  <input type="file" id="csv" (change)="onCsvUpload($event)" accept=".csv" />
+  <!-- Το <br> δεν είναι πλέον απαραίτητο, αλλά δεν πειράζει αν μείνει -->
+  <br /> 
+  <label for="json">JSON Template:</label>
+  <input type="file" id="json" (change)="onJsonUpload($event)" accept=".json" />
+  <!-- Τα <br><br> δεν είναι πλέον απαραίτητα, αλλά δεν πειράζουν -->
+  <br /><br /> 
+  <button (click)="submitFiles()">Commit</button>
+</div>

@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/string-similarity": "^4.0.2"
+  },
+  "dependencies": {
+    "string-similarity": "^4.0.4"
+  }
+}

@@ -1,0 +1,119 @@
+/* =================================================================== */
+/*           DOWNLOAD BUTTONS COMPONENT - GLASSMORPHIC THEME           */
+/* =================================================================== */
+
+// 1. Μεταβλητές για το Glassmorphism θέμα
+$text-dark: #ffffff;
+$glass-bg: rgba(255, 255, 255, 0.2);
+$glass-border: rgba(255, 255, 255, 0.2);
+$input-bg: rgba(44, 62, 80, 0.15);
+$button-hover-bg: rgba(255, 255, 255, 0.2);
+$shadow-color: rgba(0, 0, 0, 0.2);
+$animation-curve: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+// 2. Styling για το βασικό wrapper (παραμένει το ίδιο για το layout)
+.download-buttons-wrapper {
+  display: flex;
+  gap: 2rem;
+  width: 100%; // Βεβαιώνει ότι παίρνει όλο το πλάτος
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+// 3. Στυλ για κάθε κάρτα-container (⭐ ΑΝΑΒΑΘΜΙΣΗ ΣΕ GLASSMORPHISM)
+.download-container {
+  flex: 1;
+  padding: 1.5rem;
+  border-radius: 15px; // Ταιριάζει με τα άλλα στοιχεία
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; // Λίγο παραπάνω κενό
+
+  // --- Glassmorphism Effect ---
+  background: $glass-bg;
+  border: 1px solid $glass-border;
+  box-shadow: 0 8px 32px 0 $shadow-color;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  // Animations (παραμένουν τα ίδια, αλλά με νέα καμπύλη)
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.6s $animation-curve forwards;
+
+  &:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+}
+
+// 4. Στυλ για τα Labels (προσαρμοσμένο στο νέο θέμα)
+label {
+  color: $text-dark;
+  font-size: 0.9rem;
+}
+
+// 5. Στυλ για τα Input πεδία (⭐ ΑΝΑΒΑΘΜΙΣΗ ΣΕ GLASSMORPHISM)
+input[type="text"] {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent; // Ξεκινάει χωρίς περίγραμμα
+  background-color: $input-bg;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: $text-dark;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: lighten($text-dark, 20%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba($text-dark, 0.5); // Διακριτικό περίγραμμα στο focus
+    background-color: lighten($input-bg, 3%);
+  }
+}
+
+// 6. Στυλ για τα Κουμπιά Λήψης (⭐ ΑΝΑΒΑΘΜΙΣΗ ΓΙΑ ΟΜΟΙΟΜΟΡΦΙΑ)
+.download-btn {
+  background: transparent;
+  color: $text-dark;
+  border: 1px solid transparent; // Αόρατο περίγραμμα
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s $animation-curve;
+  margin-top: auto; // ⭐ ΣΠΡΩΧΝΕΙ ΤΟ ΚΟΥΜΠΙ ΠΑΝΤΑ ΣΤΟ ΚΑΤΩ ΜΕΡΟΣ ΤΗΣ ΚΑΡΤΑΣ
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background: $button-hover-bg;
+    border-color: $glass-border;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+// --- KEYFRAMES (Παραμένουν τα ίδια) ---
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

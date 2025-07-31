@@ -1,0 +1,57 @@
+<!-- 1. Βάζουμε τα πάντα μέσα σε έναν κύριο container -->
+<div class="mapping-container">
+
+  <h2>Αντιστοίχιση CSV πεδίων με Template πεδία</h2>
+
+  <!-- 2. Ένας wrapper για τον πίνακα, για το border και το background -->
+  <div class="table-wrapper">
+    <table border="1">
+      <thead>
+        <tr>
+          <th style="width: 100px;">Ενεργό</th>
+          <th>CSV Header</th>
+          <th>Template Field</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let header of csvHeaders">
+          <td>
+            <!-- 3. Τυλίγουμε το checkbox σε ένα label για custom styling -->
+            <label class="custom-checkbox">
+              <input type="checkbox" [(ngModel)]="fieldEnabled[header]" />
+              <span></span> <!-- Αυτό το span θα γίνει το custom checkbox -->
+            </label>
+          </td>
+          <td>{{ header }}</td>
+          <td>
+            <!-- 4. Τυλίγουμε το select σε ένα div για το custom βελάκι -->
+            <div class="select-wrapper">
+              <select
+                [(ngModel)]="fieldMapping[header]"
+                [disabled]="!fieldEnabled[header]"
+                [ngStyle]="isDuplicate(header) ? { 'border-color': 'red', 'background-color': '#ffe5e5' } : {}"
+              >
+                <option value="" disabled selected>Επίλεξε πεδίο...</option> <!-- Προσθέτουμε μια default επιλογή -->
+                <option *ngFor="let templateField of templateFields" [value]="templateField">
+                  {{ templateField }}
+                </option>
+              </select>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Δυναμικά μηνύματα -->
+  <div *ngIf="getDuplicateTemplateFields().length > 0" class="error-message">
+    ❗ There are duplicate Template Fields. Each field must be mapped to a unique Template Field..
+  </div>
+  
+  <!-- 5. Τυλίγουμε τα κουμπιά για σωστή στοίχιση και animation -->
+  <div class="button-group">
+    <button (click)="goToCsvJsonMapping()">Go to mapping</button>
+  </div>
+</div>
+
+

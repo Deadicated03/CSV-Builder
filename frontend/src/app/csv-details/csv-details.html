@@ -1,0 +1,29 @@
+<!-- Βήμα 1: Τυλίγουμε τα πάντα στον κεντρικό container -->
+<div class="data-view-container">
+
+  <!-- Βήμα 2: Τίτλος (παραμένει ίδιος) -->
+  <h2>CSV Data Preview</h2>
+
+  <!-- Βήμα 3: Το πλαίσιο που περιέχει τα δεδομένα -->
+  <div class="virtual-scroll-container">
+      
+    <!-- Το CDK Viewport τώρα τυλίγει ΜΟΝΟ τις γραμμές δεδομένων -->
+    <cdk-virtual-scroll-viewport itemSize="40" class="data-rows-viewport">
+          <div class="virtual-scroll-header">
+      <div *ngFor="let header of headers" class="virtual-scroll-cell">{{ header }}</div>
+    </div>
+      <div *cdkVirtualFor="let row of csvData" class="virtual-scroll-row">
+        <div *ngFor="let header of headers" class="virtual-scroll-cell">
+          {{ row[header] }}
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+
+  </div>
+
+  <!-- Βήμα 4: Κουμπί δράσης (παραμένει ίδιο) -->
+  <div class="action-button-container">
+    <button class="primary-action-btn" (click)="goToCreateTemplate()">Create Template</button>
+  </div>
+
+</div>

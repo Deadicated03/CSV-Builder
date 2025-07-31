@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string"
+    },
+    "MailID": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "DateofJoining": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "EMP Age": {
+      "type": "number"
+    },
+    "EMP Status": {
+      "type": "string",
+      "format": "custom-boolean"
+    }
+  },
+  "required": [
+    "Name",
+    "MailID",
+    "DateofJoining",
+    "EMP Age",
+    "EMP Status"
+  ],
+  "errorMessages": {
+    "Name": "The field Name must be a STRING",
+    "MailID": "The field MailID must be a STRING",
+    "DateofJoining": "The field DateofJoining must be a STRING",
+    "EMP Age": "The field EMP Age must be a NUMBER",
+    "EMP Status": "The field EMP Status must be a BOOLEAN"
+  }
+}

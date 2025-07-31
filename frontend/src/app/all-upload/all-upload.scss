@@ -1,0 +1,157 @@
+/* --- Βασική ρύθμιση για Full-Screen --- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* Μαύρο φόντο για να μην "αναβοσβήνει" λευκό κατά τη φόρτωση */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden; /* Αποτρέπει το scroll */
+}
+
+/* --- Ο Κύριος Container (η φόρμα μας) --- */
+.upload-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* Τα στοιχεία το ένα κάτω από το άλλο */
+  justify-content: center; /* Κεντράρισμα κάθετα */
+  align-items: center; /* Κεντράρισμα οριζόντια */
+  
+  padding: 2rem;
+  box-sizing: border-box; 
+  text-align: center;
+  overflow: hidden; /* Κρύβει τα στοιχεία πριν ξεκινήσει το animation */
+  color: rgb(255, 255, 255);
+  
+  /* Το ίδιο ακριβώς background gradient */
+  background: radial-gradient(at 90% 10%, #B59A75 0px, transparent 40%),
+              radial-gradient(at 20% 90%, #1A4E8B 0px, transparent 50%),
+              radial-gradient(at 50% 50%, #101010 0px, #000000 70%);
+}
+
+/* --- Το ίδιο εφέ "κόκκων" (noise/grain) --- */
+
+
+
+/* --- Styling και Animation για τον Τίτλο (h2) --- */
+.upload-form h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem); /* Λίγο μικρότερο για να ταιριάζει καλύτερα */
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 2rem 0; /* Δίνουμε λίγο κενό από κάτω */
+  z-index: 1; 
+  opacity: 0;
+  margin-right: 15rem; /* Ξεκινάει αόρατο για το animation */
+
+  /* Animation #1 */
+  animation: slideDown 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* --- Styling και Animations για τα Στοιχεία της Φόρμας --- */
+
+/* Κάνουμε όλα τα στοιχεία της φόρμας αόρατα στην αρχή */
+.upload-form label,
+.upload-form input[type="file"],
+.upload-form button {
+    opacity: 0;
+    z-index: 1;
+    margin-right: 15rem;
+}
+
+/* Στοχεύουμε κάθε στοιχείο ξεχωριστά για να δώσουμε διαδοχικά animations */
+.upload-form label[for="csv"] {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+}
+.upload-form input#csv {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+}
+.upload-form label[for="json"] {
+  /* Μεγαλύτερο margin-top για να αντισταθμίσει τα <br> και να δώσει χώρο */
+  margin-top: 1.5rem; 
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+}
+.upload-form input#json {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards;
+}
+.upload-form button {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards;
+}
+
+/* Κοινό στυλ για τις ετικέτες */
+.upload-form label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+/* Ειδικό styling για τα input[type="file"] για να ταιριάζουν με το θέμα */
+.upload-form input[type="file"] {
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 350px;
+  width: 100%;
+}
+/* Styling του κουμπιού μέσα στο file input */
+.upload-form input[type="file"]::file-selector-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-right: 1rem;
+}
+
+.upload-form input[type="file"]::file-selector-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+
+/* Styling για το τελικό κουμπί Υποβολής */
+.upload-form button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2.5rem; /* Μεγαλύτερο κενό από πάνω */
+  max-width: 350px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.upload-form button:hover {
+  background: white;
+  color: black;
+}
+
+/* --- KEYFRAMES (Ορισμός των animations) --- */
+
+/* 1. Για το κατέβασμα από πάνω */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Για την εμφάνιση από κάτω */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,130 @@
+/* =================================================================== */
+/*        NO-CODE TEMPLATE PAGE - WITH FADE-IN ANIMATION             */
+/* =================================================================== */
+
+// --- Μεταβλητές (παραμένουν ίδιες) ---
+:host {
+  --text-dark: #2c3e50;
+  --text-light: #eceff1; 
+  --text-light-strong: #ffffff;
+  --glass-bg: rgba(30, 30, 40, 0.4); 
+  --glass-border: rgba(255, 255, 255, 0.2); 
+  --warn-color: #ff5252;
+  --warn-bg-hover: rgba(255, 82, 82, 0.15);
+  --animation-curve: cubic-bezier(0.2, 0.8, 0.2, 1);
+  
+  --button-primary-bg: linear-gradient(135deg, #2948ff, #6234e7);
+  --button-primary-hover-bg: linear-gradient(135deg, #3a5aff, #7b4dff);
+  --button-glow-color: rgba(98, 52, 231, 0.4);
+}
+
+// --- Layout Container ---
+.no-code-container {
+  height: 100vh; display: flex; flex-direction: column; box-sizing: border-box;
+  padding: 2rem; padding-right: 280px; align-items: flex-start; 
+  background: radial-gradient(at 90% 10%, #B59A75 0px, transparent 40%),
+              radial-gradient(at 20% 90%, #1A4E8B 0px, transparent 50%),
+              radial-gradient(at 50% 50%, #101010 0px, #000000 70%);
+}
+
+// --- ⭐ ΠΡΟΣΘΗΚΗ ANIMATION ΣΤΑ ΣΤΟΙΧΕΙΑ ΤΗΣ ΣΕΛΙΔΑΣ ---
+h2, .top-controls, .table-wrapper {
+  width: 100%;
+  // Όλα τα στοιχεία ξεκινούν αόρατα για να εμφανιστούν με animation
+  opacity: 0; 
+}
+
+h2 {
+  color: var(--text-light-strong); font-size: clamp(2rem, 5vw, 2.5rem);
+  text-align: left; margin-bottom: 1.5rem;
+  // Animation για τον τίτλο (εμφανίζεται πρώτος)
+  animation: fadeAndSlideUp 0.7s var(--animation-curve) 0.2s forwards;
+}
+
+.top-controls {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.5rem; gap: 1rem;
+  // Animation για τα controls (εμφανίζονται δεύτερα)
+  animation: fadeAndSlideUp 0.7s var(--animation-curve) 0.35s forwards;
+}
+
+.table-wrapper {
+  flex: 1; min-height: 0; overflow-y: auto;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border); border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  // Animation για τον πίνακα (εμφανίζεται τελευταίος)
+  animation: fadeAndSlideUp 0.7s var(--animation-curve) 0.5s forwards;
+}
+
+// (Το styling για το button-group και τα Material Components παραμένει ίδιο)
+.button-group {
+  display: flex; gap: 1rem;
+}
+::ng-deep .top-controls .mat-raised-button {
+  background: var(--button-primary-bg) !important;
+  color: var(--text-light-strong) !important; border-radius: 10px !important;
+  transition: all 0.2s var(--animation-curve) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  &:hover {
+    background: var(--button-primary-hover-bg) !important;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 20px 0 var(--button-glow-color) !important;
+  }
+}
+::ng-deep .template-name-field .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+::ng-deep .template-name-field .mat-form-field-flex {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 10px !important; padding: 0 1em !important;
+}
+::ng-deep .template-name-field .mat-form-field-outline {
+  display: none !important;
+}
+::ng-deep .template-name-field .mat-label {
+  color: var(--text-dark) !important; opacity: 0.7;
+}
+::ng-deep .template-name-field input.mat-input-element {
+  color: var(--text-dark) !important;
+}
+
+
+// (Το styling του πίνακα και των κουμπιών "Remove" παραμένει ίδιο)
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+}
+thead th {
+  padding: 16px; text-align: left; font-weight: 600;
+  color: var(--text-light-strong); text-transform: uppercase;
+  letter-spacing: 0.8px; border-bottom: 1px solid var(--glass-border);
+  position: sticky; top: -1px; background: var(--glass-bg); z-index: 10;
+}
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background-color: rgba(255, 255, 255, 0.15); }
+td { padding: 14px 16px; vertical-align: middle; color: var(--text-light); }
+td:first-child { color: var(--text-light-strong); font-weight: 500; }
+::ng-deep .table-wrapper .mat-raised-button[color="warn"] {
+  background: transparent !important; color: var(--warn-color) !important;
+  box-shadow: none !important; min-width: auto !important;
+  padding: 0 10px !important; line-height: 30px !important; border-radius: 6px !important;
+  &:hover { background: var(--warn-bg-hover) !important; }
+}
+
+// --- ⭐ ΝΕΑ KEYFRAMES ΓΙΑ ΤΗΝ ΕΙΣΟΔΟ ΤΗΣ ΣΕΛΙΔΑΣ ---
+@keyframes fadeAndSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); // Ξεκινάει ελαφρώς πιο κάτω
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); // Καταλήγει στη θέση του
+  }
+}

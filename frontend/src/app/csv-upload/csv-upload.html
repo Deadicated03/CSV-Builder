@@ -1,0 +1,43 @@
+<div class="hero-container">
+  
+  
+  <!-- 1. Κύριος Τίτλος (αντίστοιχο του "CSV Builder") -->
+  <h1>
+    Upload File
+  </h1>
+
+  <!-- 2. Υπότιτλος (αντίστοιχο του "A tool to organize...") -->
+  <!-- Χρησιμοποιούμε την κλάση "animated-title" για να πάρει το ίδιο animation -->
+  <h2 class="animated-title">
+    Select a CSV file from your computer
+  </h2>
+  
+  <!-- 3. Περιοχή Δράσης (αντίστοιχο του "hero-footer") -->
+  <!-- Αυτό είναι το σημείο όπου ο χρήστης θα αλληλεπιδράσει -->
+  <div class="upload-action-area">
+  
+    <!-- Το κρυφό, λειτουργικό input -->
+     
+    <input 
+      type="file" 
+      id="csv-upload-input" 
+      (change)="onFileSelected($event)" 
+      accept=".csv" 
+    />
+    
+      
+    <!-- Το custom, ορατό κουμπί-label που ενεργοποιεί το input -->
+    <label for="csv-upload-input" class="custom-file-upload-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+      <span> Choose a file...</span>
+    </label>
+    
+   
+    
+  </div>
+
+</div>

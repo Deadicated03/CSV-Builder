@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "First Name": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "Last Name": {
+      "type": "string",
+      "pattern": "(?!^\\d+$)^.+$"
+    },
+    "email": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    "phone number": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "First Name",
+    "Last Name",
+    "email",
+    "phone number"
+  ],
+  "errorMessages": {
+    "First Name": "Please enter a valid name",
+    "Last Name": "Please enter a valid last name",
+    "email": "Please enter a valid email",
+    "phone number": "Please enter a valid phone number"
+  }
+}

@@ -1,0 +1,153 @@
+.custom-dialog {
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 24px;
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dialog-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+.dialog-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group select {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 4px rgba(25, 118, 210, 0.5);
+}
+
+.hint {
+  font-size: 0.75rem;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #ff8a80;
+  margin-top: 4px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.dialog-actions button {
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.dialog-actions button[type="submit"] {
+  background-color: #1976d2;
+  color: white;
+}
+
+.dialog-actions button[type="button"] {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.dialog-actions button[disabled] {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+/* 1) Σπρώχνουμε το CSS variable να γίνει κόκκινο */
+::ng-deep .red-dialog .mat-mdc-dialog-surface {
+  --mat-dialog-container-color: red !important;
+  background-color: red !important;      /* guard override */
+  box-shadow: none !important;           /* ό,τι effect θες */
+  color: white;                          /* για τα κείμενα */
+}
+
+select {
+    /* Βάση */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 8px 32px 8px 12px;  /* δεξιά αρκετό padding για το βελάκι */
+    font-size: 0.95rem;
+    cursor: pointer;
+    position: relative;
+
+    /* Προσθέτουμε custom βελάκι */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='7' viewBox='0 0 12 7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FFF' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px 7px;
+  }
+
+  /* Στυλ για τις επιλογές όταν ανοίγει το dropdown */
+  select option {
+    background-color: rgba(30, 30, 30, 0.95);
+    color: #fff;
+    padding: 8px;
+  }
+
+  /* Αν θέλεις hover στις επιλογές (υποστηρίζεται σε ορισμένους browsers) */
+  select option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }

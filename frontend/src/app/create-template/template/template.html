@@ -1,0 +1,51 @@
+<!-- Βήμα 1: Τυλίγουμε τα πάντα σε αυτόν τον container -->
+<div class="template-container">
+
+  <!-- Ο τίτλος της σελίδας -->
+  <h2>Configure your Template</h2>
+
+  
+
+  <!-- Το div που περιέχει τον πίνακα (γυάλινο πλαίσιο) -->
+  <div class="tables-row">
+
+    <!-- ⭐ ΑΥΤΟ ΤΟ DIV ΕΙΝΑΙ ΑΠΑΡΑΙΤΗΤΟ ΓΙΑ ΤΟ SCROLL ⭐ -->
+    <div class="table-wrapper">
+      <table>
+        <!-- ⭐ Προσθήκη thead για τις κεφαλίδες. Είναι η σωστή πρακτική! ⭐ -->
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Data Type</th>
+            <th>Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Το ngFor παραμένει ακριβώς το ίδιο -->
+          <tr *ngFor="let header of headers; let i = index">
+            <td>{{ header }}</td>
+            <td>
+              <select [(ngModel)]="columnTypes[i]" [id]="'type-' + i" name="columnType-{{i}}">
+                <option *ngFor="let type of fieldTypes" [value]="type">{{ type }}</option>
+              </select>
+            </td>
+            <td>
+              <label [for]="'required-' + i">
+                <input type="checkbox" [(ngModel)]="isRequired[i]" [id]="'required-' + i" name="isRequired-{{i}}" />
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Το component με τα κουμπιά download -->
+  <app-download-buttons
+    [headers]="headers"
+    [uploadedFileName]="filename"
+    [isRequired]="isRequired"
+    [columnTypes]="columnTypes">
+  </app-download-buttons>
+
+</div>
