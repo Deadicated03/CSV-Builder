@@ -1,4 +1,4 @@
-# CSV Builder ⚙️🧩
+# CSV Builder Open Source ⚙️🧩
 
 A powerful and user-friendly tool for importing and validating CSV files against JSON templates — with full no-code template creation and smart field mapping.
 
